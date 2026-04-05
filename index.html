@@ -1,60 +1,208 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Teste divertido</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teste Divertido</title>
+
+  <style>
+    :root {
+      --bg1: #ff4d4d;
+      --bg2: #ff9f1c;
+      --bg3: #ffe66d;
+      --bg4: #2ec4b6;
+      --bg5: #5c7cfa;
+      --bg6: #9b5de5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4), var(--bg5), var(--bg6));
+      background-size: 400% 400%;
+      animation: moveBg 10s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: min(520px, 100%);
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+    }
+
+    p {
+      margin: 0 0 20px;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 100%;
+      max-width: 360px;
+      padding: 12px 14px;
+      margin: 8px 0 14px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 22px;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover {
+      transform: scale(1.04);
+      opacity: 0.95;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      min-height: 56px;
+    }
+
+    .rainbow {
+      animation: pulseBg 0.6s linear infinite;
+    }
+
+    .flag {
+      position: fixed;
+      bottom: -40px;
+      font-size: 30px;
+      pointer-events: none;
+      animation: subir 3s linear forwards;
+      z-index: 1;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes moveBg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes pulseBg {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .small {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 16px;
+    }
+  </style>
 </head>
-<body onload="ativarModo()">
 
-<div class="container">
+<body>
+  <div class="card">
+    <h1>🌈 Teste Divertido 🌈</h1>
+    <p>Digite seu nome para ver um resultado aleatório e engraçado.</p>
 
-    <h1>🏳️‍🌈 Teste 2 🏳️‍🌈</h1>
+    <input type="text" id="nome" placeholder="Digite seu nome..." />
+    <br />
+    <button onclick="gerarResultado()">INICIAR</button>
 
-    <form action="/resultado" method="POST">
-        <input type="text" name="nome" placeholder="Digite seu nome..." required>
-        <br>
-        <button type="submit">INICIAR</button>
-    </form>
+    <div id="resultado" class="result hidden"></div>
 
-    <h2 id="resultado"></h2>
+    <button id="voltarBtn" class="hidden" onclick="voltar()">TESTAR DE NOVO</button>
 
-    <button onclick="voltar()">TESTAR DE NOVO</button>
+    <div class="small">Feito para funcionar no GitHub Pages</div>
+  </div>
 
-    <audio id="musica">
-        <source src="/musica.mp3" type="audio/mpeg">
-    </audio>
+  <script>
+    function gerarResultado() {
+      const nome = document.getElementById("nome").value.trim();
+      if (!nome) {
+        alert("Digite seu nome.");
+        return;
+      }
 
-</div>
+      const porcentagem = Math.floor(90 + Math.random() * 11);
 
-<script>
-    const mostrarResultado = "{{MOSTRAR_RESULTADO}}" === "true";
-    const textoResultado = "{{RESULTADO}}";
+      const frases = [
+        "tem energia de protagonista.",
+        "sempre chama atenção por onde passa.",
+        "é impossível de ignorar.",
+        "tem uma vibe muito única.",
+        "nasceu para brilhar."
+      ];
 
-    function ativarModo() {
-        if (mostrarResultado) {
-            document.getElementById("resultado").innerText = textoResultado;
+      const motivo = frases[Math.floor(Math.random() * frases.length)];
+      const resultado = `${nome}, seu nível de zoeira é ${porcentagem}% — ${motivo}`;
 
-            const audio = document.getElementById("musica");
-            audio.play().catch(() => {});
+      const areaResultado = document.getElementById("resultado");
+      const voltarBtn = document.getElementById("voltarBtn");
 
-            document.body.classList.add("rainbow");
+      areaResultado.textContent = resultado;
+      areaResultado.classList.remove("hidden");
+      voltarBtn.classList.remove("hidden");
 
-            for (let i = 0; i < 30; i++) {
-                const flag = document.createElement("div");
-                flag.innerHTML = "🏳️‍🌈";
-                flag.classList.add("flag");
-                flag.style.left = Math.random() * 100 + "%";
-                flag.style.animationDuration = (2 + Math.random() * 3) + "s";
-                document.body.appendChild(flag);
-            }
-        }
+      document.body.classList.add("rainbow");
+
+      for (let i = 0; i < 25; i++) {
+        const item = document.createElement("div");
+        item.classList.add("flag");
+        item.textContent = "🌈";
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(item);
+
+        setTimeout(() => item.remove(), 5000);
+      }
     }
 
     function voltar() {
-        window.location.href = "/";
+      document.getElementById("nome").value = "";
+      document.getElementById("resultado").textContent = "";
+      document.getElementById("resultado").classList.add("hidden");
+      document.getElementById("voltarBtn").classList.add("hidden");
+      document.body.classList.remove("rainbow");
     }
-</script>
-
+  </script>
 </body>
 </html>
