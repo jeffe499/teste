@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste divertido</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body onload="ativarModo()">
+
+    {% if resultado is none %}
+    <div class="container">
+        <h1>🏳️‍🌈 Veja seu resultado 🏳️‍🌈</h1>
+
+        <form action="/resultado" method="POST">
+            <input type="text" name="nome" placeholder="Digite seu nome..." required>
+            <br>
+            <button type="submit">INICIAR</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="container">
+        <h1>⚠️ PROCESSANDO ⚠️</h1>
+        <h2>{{ resultado }}</h2>
+
+        <button onclick="voltar()">TESTAR DE NOVO</button>
+
+        <audio id="musica" autoplay>
+            <source src="{{ url_for('static', filename='musica.mp3') }}" type="audio/mpeg">
+        </audio>
+    </div>
+    {% endif %}
+
+    <script>
+        function ativarModo() {
+            const audio = document.getElementById("musica");
+            if (audio) {
+                audio.play().catch(() => {});
+            }
+
+            {% if resultado is not none %}
+            document.body.classList.add("rainbow");
+
+            for (let i = 0; i < 30; i++) {
+                let flag = document.createElement("div");
+                flag.innerHTML = "🏳️‍🌈";
+                flag.classList.add("flag");
+
+                flag.style.left = Math.random() * 100 + "%";
+                flag.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+                document.body.appendChild(flag);
+            }
+            {% endif %}
+        }
+
+        function voltar() {
+            window.location.href = "/";
+        }
+    </script>
+
+</body>
+</html>

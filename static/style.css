@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(red, orange, yellow, green, blue, purple);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    padding-top: 80px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+}
+
+button {
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.rainbow {
+    animation: arcoiris 0.3s linear infinite;
+}
+
+@keyframes arcoiris {
+    0% { background: red; }
+    20% { background: orange; }
+    40% { background: yellow; }
+    60% { background: green; }
+    80% { background: blue; }
+    100% { background: purple; }
+}
+
+.flag {
+    position: absolute;
+    font-size: 30px;
+    animation: subir 3s linear forwards;
+}
+
+@keyframes subir {
+    0% { bottom: -50px; }
+    100% { bottom: 100%; }
+}
