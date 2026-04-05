@@ -1,35 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    text-align: center;
     font-family: Arial, sans-serif;
     color: white;
-    background: linear-gradient(red, orange, yellow, green, blue, purple);
+    background: linear-gradient(135deg, red, orange, yellow, green, blue, purple);
     min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     overflow: hidden;
 }
 
 .container {
-    padding-top: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+
+    width: 90%;
+    max-width: 400px;
+
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 18px;
 }
 
 input {
-    padding: 10px;
-    margin: 10px;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
+    outline: none;
+
+    font-size: 16px;
 }
 
 button {
-    padding: 10px 20px;
-    background: black;
-    color: white;
+    width: 100%;
+    padding: 12px;
+
+    background: #000;
+    color: #fff;
+
     border: none;
+    border-radius: 10px;
+
     cursor: pointer;
-    border-radius: 6px;
+    font-size: 16px;
+
+    transition: 0.2s;
 }
 
+button:hover {
+    transform: scale(1.05);
+    background: #111;
+}
+
+/* 🌈 MODO ARCO-ÍRIS */
 .rainbow {
-    animation: arcoiris 0.3s linear infinite;
+    animation: arcoiris 0.4s linear infinite;
 }
 
 @keyframes arcoiris {
@@ -41,13 +84,23 @@ button {
     100% { background: purple; }
 }
 
+/* 🏳️‍🌈 FLAGS */
 .flag {
-    position: absolute;
-    font-size: 30px;
-    animation: subir 3s linear forwards;
+    position: fixed;
+    font-size: 28px;
+    bottom: -50px;
+
+    animation: subir linear forwards;
+    pointer-events: none;
 }
 
 @keyframes subir {
-    0% { bottom: -50px; }
-    100% { bottom: 100%; }
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
 }

@@ -41,13 +41,11 @@
             document.body.classList.add("rainbow");
 
             for (let i = 0; i < 30; i++) {
-                let flag = document.createElement("div");
+                const flag = document.createElement("div");
                 flag.innerHTML = "🏳️‍🌈";
                 flag.classList.add("flag");
-
                 flag.style.left = Math.random() * 100 + "%";
                 flag.style.animationDuration = (2 + Math.random() * 3) + "s";
-
                 document.body.appendChild(flag);
             }
         }
