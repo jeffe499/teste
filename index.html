@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste divertido</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body onload="ativarModo()">
+
+<div class="container">
+
+    <h1>🏳️‍🌈 Teste 🏳️‍🌈</h1>
+
+    <form action="/resultado" method="POST">
+        <input type="text" name="nome" placeholder="Digite seu nome..." required>
+        <br>
+        <button type="submit">INICIAR</button>
+    </form>
+
+    <h2 id="resultado"></h2>
+
+    <button onclick="voltar()">TESTAR DE NOVO</button>
+
+    <audio id="musica">
+        <source src="/musica.mp3" type="audio/mpeg">
+    </audio>
+
+</div>
+
+<script>
+    const mostrarResultado = "{{MOSTRAR_RESULTADO}}" === "true";
+    const textoResultado = "{{RESULTADO}}";
+
+    function ativarModo() {
+        if (mostrarResultado) {
+            document.getElementById("resultado").innerText = textoResultado;
+
+            const audio = document.getElementById("musica");
+            audio.play().catch(() => {});
+
+            document.body.classList.add("rainbow");
+
+            for (let i = 0; i < 30; i++) {
+                let flag = document.createElement("div");
+                flag.innerHTML = "🏳️‍🌈";
+                flag.classList.add("flag");
+
+                flag.style.left = Math.random() * 100 + "%";
+                flag.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+                document.body.appendChild(flag);
+            }
+        }
+    }
+
+    function voltar() {
+        window.location.href = "/";
+    }
+</script>
+
+</body>
+</html>

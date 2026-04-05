@@ -16,7 +16,6 @@ input {
     padding: 10px;
     margin: 10px;
     border: none;
-    outline: none;
     border-radius: 6px;
 }
 
@@ -27,10 +26,6 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 6px;
-}
-
-button:hover {
-    opacity: 0.85;
 }
 
 .rainbow {
